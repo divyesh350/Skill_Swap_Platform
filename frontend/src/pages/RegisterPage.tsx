@@ -11,7 +11,6 @@ import Input from '@/components/atoms/Input'
 
 const registerSchema = z.object({
   email: z.string().email('Please enter a valid email address'),
-  username: z.string().min(3, 'Username must be at least 3 characters').max(20, 'Username must be less than 20 characters'),
   firstName: z.string().min(2, 'First name must be at least 2 characters'),
   lastName: z.string().min(2, 'Last name must be at least 2 characters'),
   password: z.string().min(8, 'Password must be at least 8 characters'),
@@ -41,7 +40,6 @@ const RegisterPage: React.FC = () => {
     try {
       const formData = {
         email: data.email,
-        username: data.username,
         fullName: `${data.firstName} ${data.lastName}`,
         password: data.password,
       }
@@ -85,13 +83,7 @@ const RegisterPage: React.FC = () => {
           />
         </div>
 
-        <Input
-          label="Username"
-          leftIcon={<User className="h-5 w-5" />}
-          error={errors.username?.message}
-          helperText="This will be your unique identifier"
-          {...register('username')}
-        />
+
 
         <Input
           label="Email Address"

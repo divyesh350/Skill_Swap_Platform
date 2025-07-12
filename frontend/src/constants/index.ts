@@ -1,5 +1,5 @@
 // API Configuration
-export const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api'
+export const API_BASE_URL = (import.meta as any).env?.VITE_API_URL || 'http://localhost:3000/api' 
 
 // Local Storage Keys
 export const STORAGE_KEYS = {
@@ -72,11 +72,6 @@ export const FILE_UPLOAD = {
 
 // Validation Rules
 export const VALIDATION_RULES = {
-  USERNAME: {
-    MIN_LENGTH: 3,
-    MAX_LENGTH: 20,
-    PATTERN: /^[a-zA-Z0-9_]+$/,
-  },
   PASSWORD: {
     MIN_LENGTH: 8,
     MAX_LENGTH: 128,
