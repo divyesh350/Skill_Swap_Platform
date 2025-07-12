@@ -128,7 +128,7 @@ darkMode: 'class' // Use 'media' for auto
 - Use `React Router DOM v6` with `BrowserRouter`
 - Create route configs:
 
-```tsx
+```jsx
 <Route path="/" element={<LandingPage />} />
 <Route path="/dashboard" element={<Dashboard />} />
 <Route path="/profile/:userId" element={<UserProfile />} />
@@ -159,7 +159,7 @@ darkMode: 'class' // Use 'media' for auto
 
 ### Zustand Store Example
 
-```ts
+```js
 // stores/userStore.ts
 import { create } from 'zustand'
 
@@ -187,7 +187,7 @@ export const useUserStore = create((set) => ({
 
 ### Framer Motion Setup
 
-```tsx
+```jsx
 <motion.div
   initial={{ opacity: 0 }}
   animate={{ opacity: 1 }}
@@ -212,7 +212,7 @@ Use **React Hook Form** with **Zod** or **Yup** for schema-based validation.
 
 ### Example
 
-```tsx
+```jsx
 const schema = z.object({
   email: z.string().email(),
   password: z.string().min(8),
@@ -243,7 +243,7 @@ services/
 
 ### Fetch Pattern
 
-```ts
+```js
 export async function getUserProfile() {
   try {
     const { data } = await api.get('/users/profile')
@@ -293,7 +293,7 @@ export async function getUserProfile() {
 
 ### Example Test
 
-```tsx
+```jsx
 test('renders dashboard', () => {
   render(<Dashboard />)
   expect(screen.getByText(/Your Swaps/i)).toBeInTheDocument()
