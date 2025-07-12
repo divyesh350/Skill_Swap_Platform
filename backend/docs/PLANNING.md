@@ -1,93 +1,105 @@
-# Skill Swap Platform Backend Planning
+# 📘 Skill Swap Platform – Backend PLANNING.md
 
-## Project Overview
-The backend is the core engine of the Skill Swap Platform, responsible for user authentication, profile and skill management, intelligent skill matching, swap request lifecycle, real-time messaging, notifications, and admin operations. It ensures security, reliability, and scalability for all platform interactions.
+## 🧠 Project Overview
 
-## Tech Stack Summary
-- **Node.js** & **Express.js**: RESTful API, middleware, and routing
-- **MongoDB** & **Mongoose**: Document database and ODM
-- **Redis**: Caching, session, and queue management
-- **Socket.IO**: Real-time messaging
-- **JWT**: Authentication
-- **bcrypt**: Password hashing
-- **Nodemailer**: Email notifications
-- **Cloudinary**: File/image storage
-- **Bull**: Background jobs
-- **Winston**: Logging
-- **Helmet, CORS, express-validator**: Security & validation
+The backend of the Skill Swap Platform is responsible for handling:
 
-## System Architecture Diagram
-```mermaid
-flowchart TD
-  Client[Frontend Client]
-  API[Express.js API Layer]
-  Auth[Authentication & JWT]
-  User[User/Profile/Skill Service]
-  Swap[Swap Request Service]
-  Msg[Messaging Service (Socket.IO)]
-  Notif[Notification Service]
-  Admin[Admin/Moderation]
-  Mongo[(MongoDB)]
-  Redis[(Redis)]
-  Cloud[Cloudinary]
+* User authentication and authorization
+* Profile and skill data management
+* Skill swap matchmaking and lifecycle
+* Real-time communication (chat/messages)
+* Notifications
+* Admin and analytics services
 
-  Client <--> API
-  API <--> Auth
-  API <--> User
-  API <--> Swap
-  API <--> Msg
-  API <--> Notif
-  API <--> Admin
-  User <--> Mongo
-  Swap <--> Mongo
-  Msg <--> Mongo
-  Notif <--> Mongo
-  Admin <--> Mongo
-  API <--> Redis
-  API <--> Cloud
+This architecture enables secure, scalable, and real-time peer-to-peer skill exchange.
+
+## ⚙️ Tech Stack
+
+* **Node.js + Express.js** – Core backend framework
+* **MongoDB** – Document-based database
+* **Mongoose** – ODM for MongoDB
+* **Redis** – Session and cache management
+* **Socket.IO** – Real-time communication
+* **JWT** – Authentication (15min access + 7d refresh)
+* **bcrypt** – Password hashing
+* **helmet, cors, dotenv** – Security and environment setup
+* **winston** – Logging
+* **express-validator** – Input validation
+* **nodemailer** – Email communication
+* **cloudinary** – Image uploads (optional)
+
+## 🗂️ Folder Structure
+
+```
+/backend
+  ├── docs
+  │   ├── PLANNING.md
+  │   └── TASK.md
+  └── src
+      ├── controllers       # Request handlers
+      ├── models            # Mongoose schemas
+      ├── routes            # Express route definitions
+      ├── services          # Business logic modules
+      ├── sockets           # Real-time messaging handlers
+      ├── middlewares       # Authentication, errors, logging
+      ├── validators        # Request input validation
+      ├── config            # DB, Redis, env loaders
+      ├── utils             # Helpers, constants
+      ├── jobs              # Background workers
+      └── tests             # Unit and integration tests
 ```
 
-## Key Modules
-- **Authentication**: Registration, login, JWT, email verification, password reset, RBAC
-- **User Profiles**: CRUD, photo upload, bio, location, availability
-- **Skills**: Offered/wanted, categories, levels, endorsements
-- **Swap Requests**: Create, accept, reject, complete, feedback, status tracking
-- **Messaging**: Real-time chat, file attachments, read receipts
-- **Notifications**: In-app, email, preferences
-- **Admin/Moderation**: User management, content review, analytics
+## 🔄 Key Flows
 
-## Folder Structure
-```
-backend/
-├── config/         # Environment, DB, Redis, 3rd party configs
-├── controllers/    # Route controllers (business logic entry)
-├── middlewares/    # Auth, validation, error, rate limit, logging
-├── models/         # Mongoose schemas (User, Swap, Message, etc.)
-├── routes/         # Express routers (API endpoints)
-├── services/       # Business logic, matching, notifications
-├── utils/          # Helpers, validators, logger
-├── tests/          # Unit/integration tests
-├── uploads/        # Uploaded files (dev only)
-├── docs/           # Documentation, planning, task tracking
-├── app.js          # Express app entry
-├── server.js       # Server bootstrap
-└── .env            # Environment variables
-```
+1. **User Registration** → Email Verification → Login → Token Management
+2. **Profile Setup** → Skill Addition (offered/wanted) → Availability Setup
+3. **Skill Search / Recommendations** → View Profiles → Send Swap Request
+4. **Swap Request Lifecycle** → Accept / Reject → Chat → Complete → Feedback
+5. **Messaging** → Real-time using Socket.IO rooms scoped to swapId
+6. **Admin Panel** → Moderation, Analytics, Flagged Reports
 
-## Design Principles
-- **Modular, maintainable code**
-- **Security-first**: JWT, bcrypt, Helmet, input validation
-- **Comprehensive validation**: express-validator, Mongoose
-- **Centralized error handling & logging**: Winston
-- **Scalable & stateless**: JWT, Redis, background jobs
-- **Clear API contracts**: RESTful, versioned endpoints
-- **Testability**: Unit, integration, E2E tests
+## 🛡️ Design Principles
 
-## Core Workflows
-1. **Registration → Email Verification → Login**
-2. **Profile Setup → Skill Addition → Availability Configuration**
-3. **Skill Matching → Search/Discovery → Swap Request Creation**
-4. **Swap Negotiation → Messaging → Accept/Reject/Counter**
-5. **Swap Completion → Feedback/Rating**
-6. **Notifications at each key event**
-7. **Admin actions: moderation, analytics, user management** 
+* Modular, layered architecture (controllers → services → DB)
+* Separation of concerns: routes, validation, business logic
+* Reusable services and schema validators
+* Defensive coding: validation, sanitization, error handling
+* Scalable: Redis caching, real-time architecture, queue workers
+
+## 📊 Schema Anchors
+
+* **User** – profile, skills, availability, reputation
+* **SwapRequest** – offered/requested skills, schedule, status, feedback
+* **Message** – threaded swap-specific chat
+* **SkillCategory** – hierarchical filtering
+* **Notification** – user alerts (in-app + email)
+
+## 📌 API Guidelines
+
+* RESTful endpoints with clear groupings
+* Secure all protected routes with JWT middleware
+* Validate input on every route
+* Modularize large route files (e.g., `/users`, `/auth`, `/swaps`)
+* Swagger/Postman doc to be maintained
+
+## ✅ Testing Strategy
+
+* Use `Jest` + `Supertest`
+* Test types: unit, integration
+* Tests must include:
+
+  * Normal use case
+  * Edge case
+  * Failure case
+
+## 📈 Deployment Notes
+
+* Use Docker Compose for local, staging, and prod
+* Use Redis & Mongo as service containers
+* CI/CD via GitHub Actions with test + deploy
+* Monitoring and logging using APM tools (optional)
+
+---
+
+This file must be reviewed and updated whenever new modules or features are added.
+All logic must conform to this architecture.
