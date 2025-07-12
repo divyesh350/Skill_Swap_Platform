@@ -213,6 +213,363 @@ router.get('/admin', authenticateToken, requireRole('admin'), (req, res) => {
 
 ---
 
+### 8. User Profile Endpoints
+
+**GET** `/api/users/profile`
+- Get the current user's profile (protected)
+- **Auth required:** Bearer JWT (access token)
+- **Response:**
+```
+{
+  "user": {
+    "_id": "...",
+    "email": "user@example.com",
+    "profile": {
+      "fullName": "John Doe",
+      "bio": "...",
+      "location": { "city": "...", "country": "..." },
+      "profilePhoto": { "url": "...", "publicId": "...", "uploadDate": "..." },
+      ...
+    },
+    ...
+  }
+}
+```
+- **Errors:**
+  - `401 Unauthorized` if not logged in
+  - `404 Not Found` if user not found
+
+**PUT** `/api/users/profile`
+- Update the current user's profile (protected)
+- **Auth required:** Bearer JWT (access token)
+- **Request Body:**
+```
+{
+  "fullName": "New Name", // optional
+  "bio": "New bio", // optional
+  "location": { "city": "New City", "country": "New Country" }, // optional
+  "timezone": "UTC+2", // optional
+  "preferences": { ... } // optional
+}
+```
+- **Response:**
+```
+{
+  "user": { ...updated user object... }
+}
+```
+- **Errors:**
+  - `400 Bad Request` for validation errors
+  - `401 Unauthorized` if not logged in
+  - `404 Not Found` if user not found
+
+**GET** `/api/users/:id`
+- Get a public profile by user ID (public)
+- **Response:**
+```
+{
+  "user": {
+    "_id": "...",
+    "profile": {
+      "fullName": "...",
+      "bio": "...",
+      "location": { ... },
+      "profilePhoto": { ... },
+      ...
+    },
+    // No sensitive fields
+  }
+}
+```
+- **Errors:**
+  - `404 Not Found` if user not found
+
+**Explanation:**
+- These endpoints allow users to view and update their own profile, and allow anyone to view public profiles by user ID. Sensitive fields are excluded from public responses.
+
+---
+
+### 8. Profile Photo Upload & Delete
+
+**POST** `/api/users/profile/photo`
+- Upload a new profile photo for the current user.
+- **Auth required:** Bearer JWT (access token)
+- **Request:** `multipart/form-data` with a single file field named `photo` (JPEG, PNG, or WEBP, max 5MB)
+- **Response:**
+```
+{
+  "message": "Profile photo updated",
+  "profilePhoto": {
+    "url": "https://...",
+    "publicId": "...",
+    "uploadDate": "2024-05-01T12:34:56.789Z"
+  }
+}
+```
+- **Errors:**
+  - `400 Bad Request` if no file is sent or invalid file type/size
+  - `401 Unauthorized` if not logged in
+  - `404 Not Found` if user not found
+
+**DELETE** `/api/users/profile/photo`
+- Delete the current user's profile photo (from Cloudinary and DB)
+- **Auth required:** Bearer JWT (access token)
+- **Response:**
+```
+{
+  "message": "Profile photo deleted"
+}
+```
+- **Errors:**
+  - `401 Unauthorized` if not logged in
+  - `404 Not Found` if user not found
+
+**Explanation:**
+- These endpoints allow authenticated users to upload or remove their profile photo. Uploads are validated and stored in Cloudinary. Deleting is idempotent (safe to call even if no photo exists).
+
+---
+
+### 9. Offered Skills Endpoints
+
+**GET** `/api/users/skills/offered`
+- Get all offered skills for the current user (protected)
+- **Auth required:** Bearer JWT (access token)
+- **Response:**
+```
+{
+  "skills": [
+    {
+      "_id": "...",
+      "name": "Guitar",
+      "category": "Music",
+      "level": "Intermediate",
+      "description": "Acoustic guitar lessons",
+      ...
+    },
+    ...
+  ]
+}
+```
+- **Errors:**
+  - `401 Unauthorized` if not logged in
+  - `404 Not Found` if user not found
+
+**POST** `/api/users/skills/offered`
+- Add a new offered skill (protected)
+- **Auth required:** Bearer JWT (access token)
+- **Request Body:**
+```
+{
+  "name": "Guitar",
+  "category": "Music",
+  "level": "Intermediate",
+  "description": "Acoustic guitar lessons"
+}
+```
+- **Response:**
+```
+{
+  "skill": { ...created skill object... }
+}
+```
+- **Errors:**
+  - `400 Bad Request` for validation errors
+  - `401 Unauthorized` if not logged in
+  - `404 Not Found` if user not found
+
+**PUT** `/api/users/skills/offered/:skillId`
+- Update an offered skill (protected)
+- **Auth required:** Bearer JWT (access token)
+- **Request Body:**
+```
+{
+  "name": "Guitar",
+  "category": "Music",
+  "level": "Advanced",
+  "description": "Now advanced!"
+}
+```
+- **Response:**
+```
+{
+  "skill": { ...updated skill object... }
+}
+```
+- **Errors:**
+  - `400 Bad Request` for validation errors
+  - `401 Unauthorized` if not logged in
+  - `404 Not Found` if user or skill not found
+
+**DELETE** `/api/users/skills/offered/:skillId`
+- Delete an offered skill (protected)
+- **Auth required:** Bearer JWT (access token)
+- **Response:**
+```
+{
+  "message": "Skill deleted"
+}
+```
+- **Errors:**
+  - `401 Unauthorized` if not logged in
+  - `404 Not Found` if user or skill not found
+
+**Explanation:**
+- These endpoints allow authenticated users to manage their offered skills. All operations are performed on the current user's skills array. Validation is enforced for all input fields.
+
+---
+
+### 10. Wanted Skills Endpoints
+
+**GET** `/api/users/skills/wanted`
+- Get all wanted skills for the current user (protected)
+- **Auth required:** Bearer JWT (access token)
+- **Response:**
+```
+{
+  "skills": [
+    {
+      "_id": "...",
+      "name": "Piano",
+      "category": "Music",
+      "priority": "High",
+      "description": "Learn piano basics",
+      ...
+    },
+    ...
+  ]
+}
+```
+- **Errors:**
+  - `401 Unauthorized` if not logged in
+  - `404 Not Found` if user not found
+
+**POST** `/api/users/skills/wanted`
+- Add a new wanted skill (protected)
+- **Auth required:** Bearer JWT (access token)
+- **Request Body:**
+```
+{
+  "name": "Piano",
+  "category": "Music",
+  "priority": "High",
+  "description": "Learn piano basics"
+}
+```
+- **Response:**
+```
+{
+  "skill": { ...created skill object... }
+}
+```
+- **Errors:**
+  - `400 Bad Request` for validation errors
+  - `401 Unauthorized` if not logged in
+  - `404 Not Found` if user not found
+
+**PUT** `/api/users/skills/wanted/:skillId`
+- Update a wanted skill (protected)
+- **Auth required:** Bearer JWT (access token)
+- **Request Body:**
+```
+{
+  "name": "Piano",
+  "category": "Music",
+  "priority": "Medium",
+  "description": "Now intermediate!"
+}
+```
+- **Response:**
+```
+{
+  "skill": { ...updated skill object... }
+}
+```
+- **Errors:**
+  - `400 Bad Request` for validation errors
+  - `401 Unauthorized` if not logged in
+  - `404 Not Found` if user or skill not found
+
+**DELETE** `/api/users/skills/wanted/:skillId`
+- Delete a wanted skill (protected)
+- **Auth required:** Bearer JWT (access token)
+- **Response:**
+```
+{
+  "message": "Skill deleted"
+}
+```
+- **Errors:**
+  - `401 Unauthorized` if not logged in
+  - `404 Not Found` if user or skill not found
+
+**Explanation:**
+- These endpoints allow authenticated users to manage their wanted skills. All operations are performed on the current user's skills array. Validation is enforced for all input fields.
+
+---
+
+### 11. Availability Endpoints
+
+**GET** `/api/users/availability`
+- Get the current user's availability (protected)
+- **Auth required:** Bearer JWT (access token)
+- **Response:**
+```
+{
+  "availability": {
+    "timezone": "UTC",
+    "isAvailable": true,
+    "schedule": [
+      {
+        "day": "Monday",
+        "timeSlots": [
+          { "start": "09:00", "end": "11:00", "isActive": true }
+        ]
+      }
+    ],
+    "blockedDates": ["2024-06-01"],
+    "lastUpdated": "2024-06-01T12:00:00.000Z"
+  }
+}
+```
+- **Errors:**
+  - `401 Unauthorized` if not logged in
+  - `404 Not Found` if user not found
+
+**PUT** `/api/users/availability`
+- Update the current user's availability (protected)
+- **Auth required:** Bearer JWT (access token)
+- **Request Body:**
+```
+{
+  "timezone": "UTC+2",
+  "isAvailable": false,
+  "schedule": [
+    {
+      "day": "Monday",
+      "timeSlots": [
+        { "start": "09:00", "end": "11:00", "isActive": true }
+      ]
+    }
+  ],
+  "blockedDates": ["2024-06-01"]
+}
+```
+- **Response:**
+```
+{
+  "availability": { ...updated availability object... }
+}
+```
+- **Errors:**
+  - `400 Bad Request` for validation errors
+  - `401 Unauthorized` if not logged in
+  - `404 Not Found` if user not found
+
+**Explanation:**
+- These endpoints allow authenticated users to view and update their availability, including timezone, weekly schedule, and blocked dates. Validation is enforced for all input fields.
+
+---
+
 ## Error Handling
 - All endpoints return JSON error objects with `error` and (optionally) `details` fields.
 - Validation errors return `400 Bad Request` with details.

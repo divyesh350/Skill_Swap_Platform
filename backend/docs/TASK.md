@@ -7,15 +7,15 @@
 * [x] **Login & Token Issuance** – Access and refresh tokens
 * [x] **Forgot/Reset Password Flow** – Token and expiry-based reset
 * [x] **JWT Middleware** – Secure routes
-* [ ] **Role-based Access Control** – Admin and user roles
+* [x] **Role-based Access Control** – Admin and user roles
 
 ## 👤 User Profile & Skill Management
 
-* [ ] **Get/Update User Profile** – Full editable profile fields
-* [ ] **Upload/Delete Profile Photo** – Cloudinary integration
-* [ ] **Manage Offered Skills** – CRUD for offered skills
-* [ ] **Manage Wanted Skills** – CRUD for wanted skills
-* [ ] **Set Availability** – Timezone, days, time slots, blocked dates
+* [x] **Get/Update User Profile** – Full editable profile fields
+* [x] **Upload/Delete Profile Photo** – Cloudinary integration
+* [x] **Manage Offered Skills** – CRUD for offered skills
+* [x] **Manage Wanted Skills** – CRUD for wanted skills
+* [x] **Set Availability** – Timezone, days, time slots, blocked dates
 
 ## 🔄 Swap Request Lifecycle
 
