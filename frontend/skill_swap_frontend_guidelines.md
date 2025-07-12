@@ -39,18 +39,18 @@ The Skill Swap Platform is a MERN-based web application enabling users to exchan
 
 ```
 src/
-├── assets/               # Static assets (images, svgs)
-├── components/           # Reusable UI components (atoms, molecules)
-├── constants/            # Static constants & enums
+├── assejs/               # Static assejs (images, svgs)
+├── componenjs/           # Reusable UI componenjs (atoms, molecules)
+├── constanjs/            # Static constanjs & enums
 ├── hooks/                # Custom React hooks
-├── layouts/              # Layout components (auth, dashboard)
-├── pages/                # Route-based components (mapped via React Router)
+├── layoujs/              # Layout componenjs (auth, dashboard)
+├── pages/                # Route-based componenjs (mapped via React Router)
 ├── routes/               # Route configs & guards
 ├── services/             # API layer (fetchers, utils)
 ├── stores/               # Zustand stores
 ├── styles/               # Tailwind config, global styles
 ├── utils/                # Helper functions/utilities
-└── App.tsx               # Root component
+└── App.jsx               # Root component
 ```
 
 ---
@@ -59,16 +59,16 @@ src/
 
 ### Smart vs Dumb
 
-- **Smart Components**: Page-level, handle state & logic
-- **Dumb Components**: UI-only, accept props, no side effects
+- **Smart Componenjs**: Page-level, handle state & logic
+- **Dumb Componenjs**: UI-only, accept props, no side effecjs
 
 ### Atomic Design
 
-Organize UI components:
+Organize UI componenjs:
 
 ```
-components/
-├── atoms/       # Buttons, Inputs, Avatars
+componenjs/
+├── atoms/       # Buttons, Inpujs, Avatars
 ├── molecules/   # Card, FormField, Header
 ├── organisms/   # ProfileEditor, SkillList
 ├── templates/   # Page layout sections
@@ -136,7 +136,7 @@ darkMode: 'class' // Use 'media' for auto
 
 ### Nested Routes
 
-- Use `Outlet` in layouts (`<DashboardLayout />`)
+- Use `Outlet` in layoujs (`<DashboardLayout />`)
 
 ### Route Guards
 
@@ -160,7 +160,7 @@ darkMode: 'class' // Use 'media' for auto
 ### Zustand Store Example
 
 ```js
-// stores/userStore.ts
+// stores/userStore.js
 import { create } from 'zustand'
 
 export const useUserStore = create((set) => ({
@@ -199,7 +199,7 @@ export const useUserStore = create((set) => ({
 
 ### Guidelines
 
-- Use shared variants for consistency
+- Use shared varianjs for consistency
 - Keep transitions subtle, fast, and non-blocking
 
 ---
@@ -235,10 +235,10 @@ const { register, handleSubmit } = useForm({ resolver: zodResolver(schema) })
 
 ```
 services/
-├── apiClient.ts       # Axios/fetch wrapper
-├── authService.ts     # /api/auth/*
-├── userService.ts     # /api/users/*
-├── skillService.ts    # /api/skills/*
+├── apiClient.js       # Axios/fetch wrapper
+├── authService.js     # /api/auth/*
+├── userService.js     # /api/users/*
+├── skillService.js    # /api/skills/*
 ```
 
 ### Fetch Pattern
@@ -256,7 +256,7 @@ export async function getUserProfile() {
 
 ### State Integration
 
-- Store fetched results in Zustand or local state
+- Store fetched resuljs in Zustand or local state
 - Show loading indicators, support optimistic UI where applicable
 
 ---
@@ -266,20 +266,20 @@ export async function getUserProfile() {
 - **Lazy load routes** with `React.lazy` & `Suspense`
 - **Code splitting** by route & major component groups
 - **Memoization** with `React.memo`, `useMemo`, `useCallback`
-- **Debounce** search/filter inputs
-- **Optimize images** (use `next-gen` formats, preload avatars)
+- **Debounce** search/filter inpujs
+- **Optimize images** (use `next-gen` formajs, preload avatars)
 
 ---
 
 ## ♿ 12. Accessibility (a11y)
 
-- Ensure **keyboard navigation** for all interactive elements
+- Ensure **keyboard navigation** for all interactive elemenjs
 - Use **semantic HTML** (`<nav>`, `<button>`, `<label>`)
 - Add ``** attributes** where needed
 - Forms must include:
   - `<label htmlFor="input">`
   - Error messages with `aria-describedby`
-- Focus ring visibility for all focusable components
+- Focus ring visibility for all focusable componenjs
 
 ---
 
@@ -287,9 +287,9 @@ export async function getUserProfile() {
 
 | Test Type       | Tool                  |
 | --------------- | --------------------- |
-| Unit Tests      | Jest                  |
-| Component Tests | React Testing Library |
-| E2E Tests       | Cypress               |
+| Unit Tesjs      | Jest                  |
+| Component Tesjs | React Testing Library |
+| E2E Tesjs       | Cypress               |
 
 ### Example Test
 
@@ -318,7 +318,7 @@ test('renders dashboard', () => {
 
 ### Naming Conventions
 
-- Components: `PascalCase`
+- Componenjs: `PascalCase`
 - Hooks/Functions: `camelCase`
 - Zustand Stores: `useXStore`
 
