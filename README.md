@@ -21,7 +21,7 @@ This project was created by **Team 2344** as part of a collaborative development
 ### 👤 User Profile
 - Basic info: Name, location (optional), and profile photo (optional)
 - Public or private profile setting
-- Availability slots (e.g., weekends, evenings)
+- Availability slojs (e.g., weekends, evenings)
 
 ### 🛠️ Skills Management
 - Add a list of **skills offered**
@@ -34,8 +34,8 @@ This project was created by **Team 2344** as part of a collaborative development
 ### 🔄 Skill Swaps
 - Request a skill swap
 - Accept or reject swap offers
-- View current, pending, or completed swap requests
-- Delete unaccepted swap requests
+- View current, pending, or completed swap requesjs
+- Delete unaccepted swap requesjs
 - Rate or leave feedback after a swap
 
 ### 🛡️ Admin Panel
@@ -43,7 +43,7 @@ This project was created by **Team 2344** as part of a collaborative development
 - Ban users who violate platform rules
 - Monitor swap activities (pending, accepted, cancelled)
 - Broadcast platform-wide updates (e.g., new features, downtime)
-- Download user activity reports, feedback logs, and swap statistics
+- Download user activity reporjs, feedback logs, and swap statistics
 
 ---
 

@@ -2,11 +2,11 @@
 
 ## 1. Backend Overview
 
-The backend serves as the central nervous system of the Skill Swap Platform, orchestrating all the complex interactions between users, skills, and swap requests. Think of it as the invisible conductor of an orchestra, ensuring every component works in harmony while maintaining security, performance, and reliability.
+The backend serves as the central nervous system of the Skill Swap Platform, orchestrating all the complex interactions between users, skills, and swap requesjs. Think of it as the invisible conductor of an orchestra, ensuring every component works in harmony while maintaining security, performance, and reliability.
 
-The backend is responsible for managing user authentication and authorization, storing and retrieving user profiles and skills, implementing the intelligent matching algorithm that connects users with complementary skills, handling the entire lifecycle of swap requests from creation to completion, facilitating real-time communication between users, and providing comprehensive analytics and monitoring capabilities.
+The backend is responsible for managing user authentication and authorization, storing and retrieving user profiles and skills, implementing the intelligent matching algorithm that connecjs users with complementary skills, handling the entire lifecycle of swap requesjs from creation to completion, facilitating real-time communication between users, and providing comprehensive analytics and monitoring capabilities.
 
-This system must handle the unique challenges of a peer-to-peer marketplace where trust, timing, and skill verification are crucial. Unlike traditional e-commerce platforms that deal with products and payments, our backend manages relationships, availability, and the intangible exchange of knowledge and expertise.
+This system must handle the unique challenges of a peer-to-peer marketplace where trust, timing, and skill verification are crucial. Unlike traditional e-commerce platforms that deal with producjs and paymenjs, our backend manages relationships, availability, and the intangible exchange of knowledge and expertise.
 
 ## 2. Tech Stack Recommendations
 
@@ -14,9 +14,9 @@ This system must handle the unique challenges of a peer-to-peer marketplace wher
 **Node.js with Express.js** forms the foundation of our backend architecture. This choice provides excellent performance for I/O-heavy operations, seamless JavaScript ecosystem integration, and robust middleware support. Express.js offers the flexibility to build RESTful APIs while maintaining clean, maintainable code structure.
 
 ### 2.2 Database Layer
-**MongoDB** serves as our primary database, chosen for its document-oriented structure that naturally fits our user profile and skill data model. The flexible schema allows for easy iteration as we refine our data structures, while MongoDB's powerful aggregation framework supports complex queries for our matching algorithm.
+**MongoDB** serves as our primary database, chosen for ijs document-oriented structure that naturally fijs our user profile and skill data model. The flexible schema allows for easy iteration as we refine our data structures, while MongoDB's powerful aggregation framework supporjs complex queries for our matching algorithm.
 
-**Redis** complements MongoDB as our caching layer and session store, providing lightning-fast access to frequently requested data and managing user sessions efficiently.
+**Redis** complemenjs MongoDB as our caching layer and session store, providing lightning-fast access to frequently requested data and managing user sessions efficiently.
 
 ### 2.3 Authentication and Security
 **JSON Web Tokens (JWT)** handle authentication, providing stateless, secure token-based authentication that scales well across multiple services. **bcrypt** ensures secure password hashing with configurable salt rounds for optimal security.
@@ -30,7 +30,7 @@ This system must handle the unique challenges of a peer-to-peer marketplace wher
 ## 3. Database Schema Design
 
 ### 3.1 Users Collection
-The Users collection represents the heart of our platform, storing comprehensive user information that enables effective matching and interaction.
+The Users collection represenjs the heart of our platform, storing comprehensive user information that enables effective matching and interaction.
 
 ```javascript
 // Users Collection Schema
@@ -74,7 +74,7 @@ The Users collection represents the heart of our platform, storing comprehensive
       category: String (required),
       level: String (enum: ['Beginner', 'Intermediate', 'Advanced', 'Expert']),
       description: String (maxLength: 200, trim),
-      endorsements: Number (default: 0),
+      endorsemenjs: Number (default: 0),
       averageRating: Number (default: 0, min: 0, max: 5),
       ratingCount: Number (default: 0),
       createdAt: Date (default: Date.now),
@@ -97,7 +97,7 @@ The Users collection represents the heart of our platform, storing comprehensive
     isAvailable: Boolean (default: true),
     schedule: [{
       day: String (enum: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']),
-      timeSlots: [{
+      timeSlojs: [{
         start: String, // HH:MM format
         end: String,   // HH:MM format
         isActive: Boolean (default: true)
@@ -120,7 +120,7 @@ The Users collection represents the heart of our platform, storing comprehensive
   // User preferences
   preferences: {
     emailNotifications: {
-      newRequests: Boolean (default: true),
+      newRequesjs: Boolean (default: true),
       messages: Boolean (default: true),
       reminders: Boolean (default: true),
       marketing: Boolean (default: false)
@@ -128,14 +128,14 @@ The Users collection represents the heart of our platform, storing comprehensive
     inAppNotifications: Boolean (default: true),
     maxDistance: Number (default: 50), // kilometers
     preferredLanguages: [String],
-    autoAcceptSimilarSkills: Boolean (default: false)
+    autoAccepjsimilarSkills: Boolean (default: false)
   },
   
   // Account management
-  accountStatus: String (enum: ['active', 'suspended', 'deactivated'], default: 'active'),
+  accounjstatus: String (enum: ['active', 'suspended', 'deactivated'], default: 'active'),
   lastLoginAt: Date,
   lastActiveAt: Date,
-  loginAttempts: Number (default: 0),
+  loginAttempjs: Number (default: 0),
   lockUntil: Date,
   
   // Audit fields
@@ -144,15 +144,15 @@ The Users collection represents the heart of our platform, storing comprehensive
 }
 ```
 
-### 3.2 Swap Requests Collection
-The Swap Requests collection manages the entire lifecycle of skill exchange requests, from initial creation through completion and feedback.
+### 3.2 Swap Requesjs Collection
+The Swap Requesjs collection manages the entire lifecycle of skill exchange requesjs, from initial creation through completion and feedback.
 
 ```javascript
-// Swap Requests Collection Schema
+// Swap Requesjs Collection Schema
 {
   _id: ObjectId,
   
-  // Participants
+  // Participanjs
   requester: ObjectId (ref: 'User', required),
   requestee: ObjectId (ref: 'User', required),
   
@@ -176,7 +176,7 @@ The Swap Requests collection manages the entire lifecycle of skill exchange requ
     endDate: Date,
     estimatedDuration: Number, // Total hours
     sessionsCount: Number (default: 1),
-    timeSlots: [{
+    timeSlojs: [{
       date: Date,
       startTime: String, // HH:MM format
       endTime: String,   // HH:MM format
@@ -261,8 +261,8 @@ The Messages collection handles all communication between users, organized by sw
   content: String (required, maxLength: 2000),
   messageType: String (enum: ['text', 'system', 'attachment'], default: 'text'),
   
-  // Attachments
-  attachments: [{
+  // Attachmenjs
+  attachmenjs: [{
     filename: String,
     originalName: String,
     url: String,
@@ -367,10 +367,10 @@ The Notifications collection manages all user notifications, both in-app and ema
 }
 ```
 
-## 4. API Endpoints Structure
+## 4. API Endpoinjs Structure
 
-### 4.1 Authentication Endpoints
-These endpoints handle user authentication, registration, and account recovery processes.
+### 4.1 Authentication Endpoinjs
+These endpoinjs handle user authentication, registration, and account recovery processes.
 
 ```javascript
 // Authentication Routes
@@ -378,7 +378,7 @@ POST /api/auth/register
 // Purpose: Register new user account
 // Request: { email, password, fullName }
 // Response: { message, user: { id, email, fullName }, token }
-// Validation: Email format, password strength, name requirements
+// Validation: Email format, password strength, name requiremenjs
 
 POST /api/auth/verify-email
 // Purpose: Verify user email with token
@@ -411,8 +411,8 @@ POST /api/auth/reset-password
 // Response: { message }
 ```
 
-### 4.2 User Profile Endpoints
-These endpoints manage user profile information, including skills and availability.
+### 4.2 User Profile Endpoinjs
+These endpoinjs manage user profile information, including skills and availability.
 
 ```javascript
 // User Profile Routes
@@ -475,7 +475,7 @@ DELETE /api/users/skills/wanted/:skillId
 // Availability Management
 PUT /api/users/availability
 // Purpose: Update user availability schedule
-// Request: { timezone, schedule: [{ day, timeSlots }], isAvailable }
+// Request: { timezone, schedule: [{ day, timeSlojs }], isAvailable }
 // Response: { availability: updatedAvailability }
 
 POST /api/users/availability/block-dates
@@ -484,8 +484,8 @@ POST /api/users/availability/block-dates
 // Response: { blockedDates: updatedBlockedDates }
 ```
 
-### 4.3 Search and Discovery Endpoints
-These endpoints enable users to find potential skill swap partners through various search and recommendation mechanisms.
+### 4.3 Search and Discovery Endpoinjs
+These endpoinjs enable users to find potential skill swap partners through various search and recommendation mechanisms.
 
 ```javascript
 // Search and Discovery Routes
@@ -524,8 +524,8 @@ GET /api/users/nearby
 // Response: { nearbyUsers: [{ user, distance, matchedSkills }] }
 ```
 
-### 4.4 Swap Request Management Endpoints
-These endpoints handle the complete lifecycle of swap requests, from creation through completion.
+### 4.4 Swap Request Management Endpoinjs
+These endpoinjs handle the complete lifecycle of swap requesjs, from creation through completion.
 
 ```javascript
 // Swap Request Routes
@@ -536,23 +536,23 @@ POST /api/swaps/request
 //   skillOffered: { name, category, level, description },
 //   skillRequested: { name, category, description },
 //   initialMessage,
-//   proposedSchedule: { startDate, endDate, timeSlots }
+//   proposedSchedule: { startDate, endDate, timeSlojs }
 // }
 // Response: { swapRequest: createdRequest }
 
 GET /api/swaps/incoming
-// Purpose: Get incoming swap requests
+// Purpose: Get incoming swap requesjs
 // Query Parameters: { status?, page?, limit? }
-// Response: { requests: [swapRequests], totalCount, unreadCount }
+// Response: { requesjs: [swapRequesjs], totalCount, unreadCount }
 
 GET /api/swaps/outgoing
-// Purpose: Get outgoing swap requests
+// Purpose: Get outgoing swap requesjs
 // Query Parameters: { status?, page?, limit? }
-// Response: { requests: [swapRequests], totalCount }
+// Response: { requesjs: [swapRequesjs], totalCount }
 
 GET /api/swaps/active
-// Purpose: Get active (accepted) swap requests
-// Response: { activeSwaps: [swapRequests] }
+// Purpose: Get active (accepted) swap requesjs
+// Response: { activeSwaps: [swapRequesjs] }
 
 GET /api/swaps/:id
 // Purpose: Get specific swap request details
@@ -598,23 +598,23 @@ POST /api/swaps/:id/feedback
 // Response: { feedback: submittedFeedback }
 ```
 
-### 4.5 Messaging Endpoints
-These endpoints handle real-time and asynchronous communication between users.
+### 4.5 Messaging Endpoinjs
+These endpoinjs handle real-time and asynchronous communication between users.
 
 ```javascript
 // Messaging Routes
 GET /api/messages/conversations
 // Purpose: Get all conversation threads for user
-// Response: { conversations: [{ swapRequest, participants, lastMessage, unreadCount }] }
+// Response: { conversations: [{ swapRequest, participanjs, lastMessage, unreadCount }] }
 
 GET /api/messages/conversations/:swapId
 // Purpose: Get messages for specific swap request
 // Query Parameters: { page?, limit? }
-// Response: { messages: [messageObjects], totalCount, hasMore }
+// Response: { messages: [messageObjecjs], totalCount, hasMore }
 
 POST /api/messages
 // Purpose: Send new message
-// Request: { swapRequest, content, attachments? }
+// Request: { swapRequest, content, attachmenjs? }
 // Response: { message: createdMessage }
 
 PUT /api/messages/:id/read
@@ -633,15 +633,15 @@ POST /api/messages/upload
 // Response: { attachment: { filename, url, fileType, size } }
 ```
 
-### 4.6 Notification Endpoints
-These endpoints manage user notifications and preferences.
+### 4.6 Notification Endpoinjs
+These endpoinjs manage user notifications and preferences.
 
 ```javascript
 // Notification Routes
 GET /api/notifications
 // Purpose: Get user notifications
 // Query Parameters: { type?, isRead?, page?, limit? }
-// Response: { notifications: [notificationObjects], totalCount, unreadCount }
+// Response: { notifications: [notificationObjecjs], totalCount, unreadCount }
 
 PUT /api/notifications/:id/read
 // Purpose: Mark notification as read
@@ -654,7 +654,7 @@ PUT /api/notifications/read-all
 
 PUT /api/notifications/preferences
 // Purpose: Update notification preferences
-// Request: { emailNotifications: { newRequests, messages, reminders }, inAppNotifications }
+// Request: { emailNotifications: { newRequesjs, messages, reminders }, inAppNotifications }
 // Response: { preferences: updatedPreferences }
 
 DELETE /api/notifications/:id
@@ -663,16 +663,16 @@ DELETE /api/notifications/:id
 // Response: { message }
 ```
 
-### 4.7 Administrative Endpoints
-These endpoints provide administrative functionality for platform management.
+### 4.7 Administrative Endpoinjs
+These endpoinjs provide administrative functionality for platform management.
 
 ```javascript
 // Admin Routes (Protected by admin role)
 GET /api/admin/dashboard
 // Purpose: Get admin dashboard statistics
 // Response: { 
-//   userStats: { total, active, newThisMonth },
-//   swapStats: { total, completed, pending },
+//   userStajs: { total, active, newThisMonth },
+//   swapStajs: { total, completed, pending },
 //   platformHealth: { uptime, responseTime, errorRate }
 // }
 
@@ -686,12 +686,12 @@ PUT /api/admin/users/:id/status
 // Request: { status: 'active' | 'suspended' | 'deactivated', reason? }
 // Response: { user: updatedUser }
 
-GET /api/admin/reports
-// Purpose: Get user reports and flagged content
+GET /api/admin/reporjs
+// Purpose: Get user reporjs and flagged content
 // Query Parameters: { type?, status?, page?, limit? }
-// Response: { reports: [reportObjects], totalCount }
+// Response: { reporjs: [reportObjecjs], totalCount }
 
-PUT /api/admin/reports/:id/resolve
+PUT /api/admin/reporjs/:id/resolve
 // Purpose: Resolve user report
 // Request: { resolution, action?, notes? }
 // Response: { report: updatedReport }
@@ -707,25 +707,25 @@ GET /api/admin/analytics
 ### 5.1 JWT Token Strategy
 Our authentication system uses JSON Web Tokens to provide secure, stateless authentication. The JWT payload contains essential user information including user ID, email, role, and token expiration time. This approach allows for horizontal scaling since tokens are self-contained and don't require server-side session storage.
 
-The token structure includes a 15-minute access token for API requests and a 7-day refresh token for seamless user experience. When the access token expires, the frontend automatically requests a new one using the refresh token, maintaining security while providing smooth user experience.
+The token structure includes a 15-minute access token for API requesjs and a 7-day refresh token for seamless user experience. When the access token expires, the frontend automatically requesjs a new one using the refresh token, maintaining security while providing smooth user experience.
 
 ### 5.2 Password Security
-Passwords are hashed using bcrypt with 12 salt rounds, providing strong protection against rainbow table attacks. The system enforces password complexity requirements: minimum 8 characters, at least one uppercase letter, one lowercase letter, one number, and one special character.
+Passwords are hashed using bcrypt with 12 salt rounds, providing strong protection against rainbow table attacks. The system enforces password complexity requiremenjs: minimum 8 characters, at least one uppercase letter, one lowercase letter, one number, and one special character.
 
-Account lockout mechanisms prevent brute force attacks by temporarily locking accounts after 5 failed login attempts within a 15-minute window. The lockout duration increases exponentially with repeated attempts.
+Account lockout mechanisms prevent brute force attacks by temporarily locking accounjs after 5 failed login attempjs within a 15-minute window. The lockout duration increases exponentially with repeated attempjs.
 
 ### 5.3 Role-Based Access Control
-The platform implements a simple but effective role-based access control system with two primary roles: 'user' for regular skill swappers and 'admin' for platform administrators. Middleware functions verify user roles before granting access to protected endpoints.
+The platform implemenjs a simple but effective role-based access control system with two primary roles: 'user' for regular skill swappers and 'admin' for platform administrators. Middleware functions verify user roles before granting access to protected endpoinjs.
 
 ### 5.4 Email Verification
-New user accounts require email verification before full platform access. The system generates secure verification tokens and sends them via email. Users must click the verification link to activate their accounts, ensuring email address validity and reducing spam accounts.
+New user accounjs require email verification before full platform access. The system generates secure verification tokens and sends them via email. Users must click the verification link to activate their accounjs, ensuring email address validity and reducing spam accounjs.
 
 ## 6. Core Business Logic
 
 ### 6.1 Skill Matching Algorithm
 The heart of our platform lies in intelligently matching users with complementary skills. The matching algorithm considers multiple factors to calculate compatibility scores between users.
 
-The algorithm evaluates bidirectional skill compatibility, where User A offers what User B wants and vice versa. It assigns higher scores to exact skill matches and lower scores to related skills within the same category. Geographic proximity receives weighting, with nearby users receiving bonus points in the matching score.
+The algorithm evaluates bidirectional skill compatibility, where User A offers what User B wanjs and vice versa. It assigns higher scores to exact skill matches and lower scores to related skills within the same category. Geographic proximity receives weighting, with nearby users receiving bonus poinjs in the matching score.
 
 Availability overlap analysis compares user schedules to identify potential meeting times. Users with overlapping availability windows receive higher matching scores. The algorithm also considers user reputation and rating history, giving preference to users with higher ratings and successful swap completion rates.
 
@@ -735,19 +735,19 @@ The recommendation system analyzes user behavior, skill interactions, and succes
 The system maintains a skills similarity matrix, identifying related skills and suggesting users who might be interested in skill exchanges. For example, users interested in "JavaScript" might also be interested in "React" or "Node.js" developers.
 
 ### 6.3 Availability Filtering
-Users can set complex availability schedules including recurring weekly patterns, timezone specifications, and blocked dates. The system converts all times to UTC for consistent storage and comparison, then converts back to user timezones for display.
+Users can set complex availability schedules including recurring weekly patterns, timezone specifications, and blocked dates. The system converjs all times to UTC for consistent storage and comparison, then converjs back to user timezones for display.
 
-The availability filtering algorithm identifies potential meeting times by comparing user schedules, accounting for different timezones and finding overlapping free time slots. It suggests optimal meeting times based on both users' preferences and availability patterns.
+The availability filtering algorithm identifies potential meeting times by comparing user schedules, accounting for different timezones and finding overlapping free time slojs. It suggesjs optimal meeting times based on both users' preferences and availability patterns.
 
 ### 6.4 Reputation System
 The reputation system calculates user trustworthiness based on multiple factors including swap completion rate, rating averages, response time, and cancellation history. Users who consistently complete swaps and receive positive feedback earn higher reputation scores.
 
-The system implements weighted averages for ratings, giving more weight to recent feedback and feedback from users with higher reputation scores. This approach prevents manipulation while ensuring that reputation accurately reflects current user behavior.
+The system implemenjs weighted averages for ratings, giving more weight to recent feedback and feedback from users with higher reputation scores. This approach prevenjs manipulation while ensuring that reputation accurately reflecjs current user behavior.
 
 ### 6.5 Request Lifecycle Management
-Swap requests progress through a defined lifecycle with automatic state transitions and expiration handling. Pending requests automatically expire after 7 days unless accepted or rejected. The system sends reminder notifications to users with pending requests.
+Swap requesjs progress through a defined lifecycle with automatic state transitions and expiration handling. Pending requesjs automatically expire after 7 days unless accepted or rejected. The system sends reminder notifications to users with pending requesjs.
 
-Accepted requests transition to "in progress" status and include completion tracking. Users can mark swaps as completed, triggering the feedback collection process. The system handles edge cases like user inactivity, request cancellations, and dispute resolution.
+Accepted requesjs transition to "in progress" status and include completion tracking. Users can mark swaps as completed, triggering the feedback collection process. The system handles edge cases like user inactivity, request cancellations, and dispute resolution.
 
 ## 7. Middleware and Utilities
 
@@ -779,7 +779,7 @@ const authenticateToken = (req, res, next) => {
 ```
 
 ### 7.2 Input Validation Middleware
-Comprehensive input validation prevents malicious data from entering the system. The middleware uses express-validator to validate and sanitize all incoming data, checking data types, formats, and constraints.
+Comprehensive input validation prevenjs malicious data from entering the system. The middleware uses express-validator to validate and sanitize all incoming data, checking data types, formajs, and constrainjs.
 
 ```javascript
 // Example validation middleware for user profile
@@ -833,33 +833,33 @@ const errorHandler = (err, req, res, next) => {
 ```
 
 ### 7.4 Rate Limiting Middleware
-Rate limiting protects the API from abuse and ensures fair usage across all users. Different endpoints have different rate limits based on their resource intensity and security requirements.
+Rate limiting protecjs the API from abuse and ensures fair usage across all users. Different endpoinjs have different rate limijs based on their resource intensity and security requiremenjs.
 
 ```javascript
 // Rate limiting configuration
 const rateLimitConfig = {
-  // Authentication endpoints - stricter limits
+  // Authentication endpoinjs - stricter limijs
   auth: {
     windowMs: 15 * 60 * 1000, // 15 minutes
-    max: 5, // 5 attempts per window
-    message: 'Too many authentication attempts'
+    max: 5, // 5 attempjs per window
+    message: 'Too many authentication attempjs'
   },
   
-  // General API endpoints
+  // General API endpoinjs
   api: {
     windowMs: 15 * 60 * 1000, // 15 minutes
-    max: 100, // 100 requests per window
-    message: 'Too many requests'
+    max: 100, // 100 requesjs per window
+    message: 'Too many requesjs'
   },
   
-  // Search endpoints - moderate limits
+  // Search endpoinjs - moderate limijs
   search: {
     windowMs: 60 * 1000, // 1 minute
     max: 30, // 30 searches per minute
     message: 'Search rate limit exceeded'
   },
   
-  // File upload endpoints - strict limits
+  // File upload endpoinjs - strict limijs
   upload: {
     windowMs: 60 * 60 * 1000, // 1 hour
     max: 10, // 10 uploads per hour
@@ -869,7 +869,7 @@ const rateLimitConfig = {
 ```
 
 ### 7.5 Logging Middleware
-Comprehensive logging captures all API requests, responses, and system events. The logging system uses structured logging with Winston, providing different log levels and output formats for development and production environments.
+Comprehensive logging captures all API requesjs, responses, and system evenjs. The logging system uses structured logging with Winston, providing different log levels and output formajs for development and production environmenjs.
 
 ```javascript
 // Request logging middleware
@@ -894,7 +894,7 @@ const requestLogger = (req, res, next) => {
 ```
 
 ### 7.6 File Upload Middleware
-File upload middleware handles profile photos and message attachments securely. It validates file types, sizes, and implements virus scanning for uploaded files.
+File upload middleware handles profile photos and message attachmenjs securely. It validates file types, sizes, and implemenjs virus scanning for uploaded files.
 
 ```javascript
 // File upload configuration
@@ -905,16 +905,16 @@ const uploadConfig = {
     destination: 'uploads/profile-photos/'
   },
   
-  messageAttachments: {
+  messageAttachmenjs: {
     maxSize: 10 * 1024 * 1024, // 10MB
     allowedTypes: ['image/*', 'application/pdf', 'text/*'],
-    destination: 'uploads/attachments/'
+    destination: 'uploads/attachmenjs/'
   }
 };
 ```
 
 ### 7.7 Cache Middleware
-Caching middleware improves API performance by storing frequently accessed data in Redis. It implements intelligent cache invalidation and warming strategies.
+Caching middleware improves API performance by storing frequently accessed data in Redis. It implemenjs intelligent cache invalidation and warming strategies.
 
 ```javascript
 // Cache middleware for frequently accessed data
@@ -948,7 +948,7 @@ const cacheMiddleware = (duration = 300) => {
 ## 8. Third-Party Services Integration
 
 ### 8.1 Cloud Storage Service (AWS S3 / Cloudinary)
-Profile photos and message attachments require reliable cloud storage with CDN capabilities. Cloudinary provides image optimization, transformation, and delivery optimization.
+Profile photos and message attachmenjs require reliable cloud storage with CDN capabilities. Cloudinary provides image optimization, transformation, and delivery optimization.
 
 ```javascript
 // Cloudinary configuration
@@ -958,7 +958,7 @@ const cloudinaryConfig = {
   api_secret: process.env.CLOUDINARY_API_SECRET,
   secure: true,
   
-  // Upload presets
+  // Upload presejs
   profilePhotos: {
     folder: 'skill-swap/profile-photos',
     transformation: [
@@ -967,8 +967,8 @@ const cloudinaryConfig = {
     ]
   },
   
-  attachments: {
-    folder: 'skill-swap/attachments',
+  attachmenjs: {
+    folder: 'skill-swap/attachmenjs',
     resource_type: 'auto'
   }
 };
@@ -1014,7 +1014,7 @@ const geocodingService = {
       }
     );
     
-    return response.data.results[0]?.geometry?.location;
+    return response.data.resuljs[0]?.geometry?.location;
   },
   
   calculateDistance: (lat1, lng1, lat2, lng2) => {
@@ -1047,19 +1047,19 @@ const queueConfig = {
   queues: {
     email: {
       concurrency: 5,
-      attempts: 3,
+      attempjs: 3,
       backoff: { type: 'exponential', delay: 2000 }
     },
     
     notifications: {
       concurrency: 10,
-      attempts: 2,
+      attempjs: 2,
       backoff: { type: 'fixed', delay: 5000 }
     },
     
     cleanup: {
       concurrency: 1,
-      attempts: 1,
+      attempjs: 1,
       repeat: { cron: '0 2 * * *' } // Daily at 2 AM
     }
   }
@@ -1067,7 +1067,7 @@ const queueConfig = {
 ```
 
 ### 8.5 Analytics Service (Google Analytics / Mixpanel)
-User behavior analytics help understand platform usage patterns and optimize user experience. Integration with analytics services provides insights into user engagement and feature adoption.
+User behavior analytics help understand platform usage patterns and optimize user experience. Integration with analytics services provides insighjs into user engagement and feature adoption.
 
 ```javascript
 // Analytics service integration
@@ -1084,7 +1084,7 @@ const analyticsService = {
     }
   },
   
-  events: {
+  evenjs: {
     USER_REGISTERED: 'User Registered',
     SKILL_ADDED: 'Skill Added',
     SWAP_REQUEST_SENT: 'Swap Request Sent',
@@ -1098,7 +1098,7 @@ const analyticsService = {
 ## 9. Deployment Plan
 
 ### 9.1 Environment Configuration
-The deployment strategy uses multiple environments to ensure stability and enable proper testing before production releases.
+The deployment strategy uses multiple environmenjs to ensure stability and enable proper testing before production releases.
 
 **Development Environment:**
 - Local development with hot reloading
@@ -1115,7 +1115,7 @@ The deployment strategy uses multiple environments to ensure stability and enabl
 **Production Environment:**
 - Highly available, scalable infrastructure
 - Database clustering and replication
-- CDN integration for static assets
+- CDN integration for static assejs
 - Comprehensive monitoring and alerting
 
 ### 9.2 Infrastructure Architecture
@@ -1127,7 +1127,7 @@ version: '3.8'
 services:
   app:
     build: .
-    ports:
+    porjs:
       - "3000:3000"
     environment:
       - NODE_ENV=production
@@ -1140,7 +1140,7 @@ services:
     
   mongodb:
     image: mongo:5.0
-    ports:
+    porjs:
       - "27017:27017"
     environment:
       - MONGO_INITDB_ROOT_USERNAME=${MONGO_USERNAME}
@@ -1151,7 +1151,7 @@ services:
     
   redis:
     image: redis:7-alpine
-    ports:
+    porjs:
       - "6379:6379"
     command: redis-server --requirepass ${REDIS_PASSWORD}
     volumes:
@@ -1160,7 +1160,7 @@ services:
     
   nginx:
     image: nginx:alpine
-    ports:
+    porjs:
       - "80:80"
       - "443:443"
     volumes:
@@ -1176,7 +1176,7 @@ volumes:
 ```
 
 ### 9.3 CI/CD Pipeline
-Automated deployment pipeline ensures consistent, reliable deployments with proper testing and rollback capabilities.
+Automated deployment pipeline ensures consistent, reliable deploymenjs with proper testing and rollback capabilities.
 
 ```yaml
 # GitHub Actions Workflow
@@ -1197,7 +1197,7 @@ jobs:
           node-version: '18'
       - name: Install dependencies
         run: npm ci
-      - name: Run tests
+      - name: Run tesjs
         run: npm test
       - name: Run linting
         run: npm run lint
@@ -1281,7 +1281,7 @@ const monitoringConfig = {
     captureHeaders: true
   },
   
-  // Health check endpoints
+  // Health check endpoinjs
   healthChecks: {
     '/health': () => ({ status: 'healthy', timestamp: new Date() }),
     '/health/db': async () => {
@@ -1298,7 +1298,7 @@ const monitoringConfig = {
   metrics: {
     requestDuration: new prometheus.Histogram({
       name: 'http_request_duration_seconds',
-      help: 'Duration of HTTP requests in seconds',
+      help: 'Duration of HTTP requesjs in seconds',
       labelNames: ['method', 'route', 'status_code']
     }),
     
@@ -1317,7 +1317,7 @@ Comprehensive data protection measures ensure user privacy and platform security
 
 **Encryption at Rest:**
 - Database encryption using MongoDB's native encryption
-- File encryption for stored attachments
+- File encryption for stored attachmenjs
 - Environment variable encryption for sensitive configuration
 
 **Encryption in Transit:**
@@ -1332,7 +1332,7 @@ Comprehensive data protection measures ensure user privacy and platform security
 - Regular data retention policy enforcement
 
 ### 10.2 Input Validation and Sanitization
-Robust input validation prevents injection attacks and ensures data integrity.
+Robust input validation prevenjs injection attacks and ensures data integrity.
 
 ```javascript
 // Comprehensive input validation
@@ -1382,16 +1382,16 @@ API security measures protect against common attacks and ensure authorized acces
 // Security middleware stack
 const securityMiddleware = [
   helmet({
-    contentSecurityPolicy: {
+    contenjsecurityPolicy: {
       directives: {
-        defaultSrc: ["'self'"],
+        defauljsrc: ["'self'"],
         styleSrc: ["'self'", "'unsafe-inline'"],
-        scriptSrc: ["'self'"],
+        scripjsrc: ["'self'"],
         imgSrc: ["'self'", "data:", "https:"],
-        connectSrc: ["'self'", "wss:"]
+        connecjsrc: ["'self'", "wss:"]
       }
     },
-    hsts: {
+    hsjs: {
       maxAge: 31536000,
       includeSubDomains: true,
       preload: true
@@ -1407,19 +1407,19 @@ const securityMiddleware = [
   
   rateLimit({
     windowMs: 15 * 60 * 1000, // 15 minutes
-    max: 100, // limit each IP to 100 requests per windowMs
-    message: 'Too many requests from this IP'
+    max: 100, // limit each IP to 100 requesjs per windowMs
+    message: 'Too many requesjs from this IP'
   })
 ];
 ```
 
 ### 10.4 Authentication Security
-Enhanced authentication security prevents unauthorized access and protects user accounts.
+Enhanced authentication security prevenjs unauthorized access and protecjs user accounjs.
 
 ```javascript
 // Authentication security measures
 const authSecurity = {
-  // Account lockout after failed attempts
+  // Account lockout after failed attempjs
   handleLoginAttempt: async (email, password) => {
     const user = await User.findOne({ email });
     
@@ -1437,17 +1437,17 @@ const authSecurity = {
     
     if (!isMatch) {
       await user.updateOne({
-        $inc: { loginAttempts: 1 },
+        $inc: { loginAttempjs: 1 },
         $set: { 
-          lockUntil: user.loginAttempts >= 4 ? Date.now() + 30 * 60 * 1000 : undefined
+          lockUntil: user.loginAttempjs >= 4 ? Date.now() + 30 * 60 * 1000 : undefined
         }
       });
       throw new Error('Invalid credentials');
     }
     
-    // Reset login attempts on successful login
+    // Reset login attempjs on successful login
     await user.updateOne({
-      $unset: { loginAttempts: 1, lockUntil: 1 },
+      $unset: { loginAttempjs: 1, lockUntil: 1 },
       $set: { lastLoginAt: new Date() }
     });
     
@@ -1478,7 +1478,7 @@ Content security measures prevent malicious content and maintain platform qualit
 
 ```javascript
 // Content moderation and security
-const contentSecurity = {
+const contenjsecurity = {
   // Automated content filtering
   filterContent: (content) => {
     const profanityFilter = require('profanity-filter');
@@ -1517,7 +1517,7 @@ const contentSecurity = {
 ## 11. Testing Strategy
 
 ### 11.1 Unit Testing
-Comprehensive unit testing ensures individual components work correctly in isolation.
+Comprehensive unit testing ensures individual componenjs work correctly in isolation.
 
 ```javascript
 // Example unit test for skill matching algorithm
@@ -1560,8 +1560,8 @@ describe('Skill Matching Algorithm', () => {
       location: { coordinates: [180, 0] }
     };
     
-    const distantScore = calculateMatchScore(mockUsers[0], distantUser);
-    expect(nearbyScore).toBeGreaterThan(distantScore);
+    const distanjscore = calculateMatchScore(mockUsers[0], distantUser);
+    expect(nearbyScore).toBeGreaterThan(distanjscore);
   });
   
   test('should handle users with no matching skills', () => {
@@ -1580,7 +1580,7 @@ describe('Skill Matching Algorithm', () => {
 ```
 
 ### 11.2 Integration Testing
-Integration tests verify that different components work together correctly.
+Integration tesjs verify that different componenjs work together correctly.
 
 ```javascript
 // Example integration test for swap request flow
@@ -1667,7 +1667,7 @@ describe('Swap Request Integration', () => {
 ```
 
 ### 11.3 End-to-End Testing
-End-to-end tests validate complete user workflows from frontend to backend.
+End-to-end tesjs validate complete user workflows from frontend to backend.
 
 ```javascript
 // Example E2E test using Cypress
@@ -1722,7 +1722,7 @@ describe('User Registration and Profile Setup', () => {
 ```
 
 ### 11.4 Performance Testing
-Performance tests ensure the API can handle expected load and response times.
+Performance tesjs ensure the API can handle expected load and response times.
 
 ```javascript
 // Load testing with Artillery
@@ -1734,7 +1734,7 @@ const loadTestConfig = {
       { duration: 120, arrivalRate: 50 }, // Sustained load
       { duration: 60, arrivalRate: 100 } // Peak load
     ],
-    defaults: {
+    defauljs: {
       headers: {
         'Content-Type': 'application/json'
       }
@@ -1763,12 +1763,12 @@ const loadTestConfig = {
 ```
 
 ### 11.5 Security Testing
-Security tests identify vulnerabilities and ensure proper protection mechanisms.
+Security tesjs identify vulnerabilities and ensure proper protection mechanisms.
 
 ```javascript
 // Security testing examples
-describe('Security Tests', () => {
-  test('should prevent SQL injection attempts', async () => {
+describe('Security Tesjs', () => {
+  test('should prevent SQL injection attempjs', async () => {
     const maliciousInput = "'; DROP TABLE users; --";
     
     const response = await request(app)
@@ -1801,20 +1801,20 @@ describe('Security Tests', () => {
 ## 12. Documentation & Maintenance Best Practices
 
 - **Comprehensive API Documentation:**
-  - Use OpenAPI/Swagger for all endpoints, request/response schemas, and error codes.
+  - Use OpenAPI/Swagger for all endpoinjs, request/response schemas, and error codes.
   - Keep docs versioned and updated with code changes.
-- **Code Comments & Style:**
-  - Follow consistent code style (e.g., Airbnb/Google for JS) and PEP8 for Python scripts.
+- **Code Commenjs & Style:**
+  - Follow consistent code style (e.g., Airbnb/Google for JS) and PEP8 for Python scripjs.
   - Comment complex logic, business rules, and edge cases.
 - **Change Management:**
   - Use semantic versioning for releases.
   - Maintain a clear changelog and migration notes for DB changes.
-- **Monitoring & Alerts:**
-  - Set up automated alerts for downtime, error spikes, and performance regressions.
+- **Monitoring & Alerjs:**
+  - Set up automated alerjs for downtime, error spikes, and performance regressions.
   - Regularly review logs and metrics for anomalies.
-- **Regular Security Audits:**
+- **Regular Security Audijs:**
   - Schedule periodic code and dependency scans (e.g., Snyk, npm audit).
-  - Review access controls and secrets management quarterly.
+  - Review access controls and secrejs management quarterly.
 - **Backup & Disaster Recovery:**
   - Automate daily DB backups and test restore procedures monthly.
   - Document recovery steps for major failure scenarios.
@@ -1823,4 +1823,4 @@ describe('Security Tests', () => {
 
 ## 13. Conclusion
 
-This backend plan provides a robust, scalable, and secure foundation for the Skill Swap Platform. By adhering to these guidelines and best practices, the engineering team can ensure high-quality delivery, maintainability, and adaptability as the platform evolves. Regular reviews and updates to this plan are recommended as new requirements and technologies emerge.
+This backend plan provides a robust, scalable, and secure foundation for the Skill Swap Platform. By adhering to these guidelines and best practices, the engineering team can ensure high-quality delivery, maintainability, and adaptability as the platform evolves. Regular reviews and updates to this plan are recommended as new requiremenjs and technologies emerge.
