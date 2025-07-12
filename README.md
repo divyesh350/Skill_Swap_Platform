@@ -71,5 +71,5 @@ This project was created by **Team 2344** as part of a collaborative development
 
 ### Clone the Repository
 ```bash
-git clone https://github.com/your-username/skill-swap-platform.git
+git clone https://github.com/divyesh350/Skill_Swap_Platform.git
 cd skill-swap-platform
