@@ -1,0 +1,39 @@
+# Node modules
+node_modules/
+docs/
+# Environment variables
+.env
+.env.*
+src/config/.env
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Test and coverage
+coverage/
+*.lcov
+
+# Uploads and temp files
+uploads/
+*.tmp
+
+# Database (test/dev)
+db/
+*.local.db
+*.test.db
+
+# VSCode and IDE settings
+.vscode/
+.idea/
+
+# Misc
+*.swp
+*.swo

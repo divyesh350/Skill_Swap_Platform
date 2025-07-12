@@ -2,11 +2,11 @@
 
 ## 📌 Authentication & User Management
 
-* [ ] **Register User** – Create user with email, password, full name
-* [ ] **Email Verification** – Token-based verification
-* [ ] **Login & Token Issuance** – Access and refresh tokens
-* [ ] **Forgot/Reset Password Flow** – Token and expiry-based reset
-* [ ] **JWT Middleware** – Secure routes
+* [x] **Register User** – Create user with email, password, full name
+* [x] **Email Verification** – Token-based verification
+* [x] **Login & Token Issuance** – Access and refresh tokens
+* [x] **Forgot/Reset Password Flow** – Token and expiry-based reset
+* [x] **JWT Middleware** – Secure routes
 * [ ] **Role-based Access Control** – Admin and user roles
 
 ## 👤 User Profile & Skill Management
